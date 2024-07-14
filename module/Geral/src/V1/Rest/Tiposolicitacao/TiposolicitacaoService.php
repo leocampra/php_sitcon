@@ -13,4 +13,8 @@ class TiposolicitacaoService
     ) {
         $this->repository = $repository;
     }
+
+    public function fetchall(){
+        return $this->repository->fetchall();
+    }
 }

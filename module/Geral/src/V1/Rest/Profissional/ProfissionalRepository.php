@@ -16,8 +16,8 @@ class ProfissionalRepository
     public function fetchall(){
         $sql = $this->tableGateway->getSql();
         $select = $sql->select()
-        ->where('status="ativo"');
-        $select->order('nome asc');
+        ->where('status="ativo"')
+        ->order('nome asc');
         //echo $sql->getSqlstringForSqlObject($select); die ;
         return $this->tableGateway->selectWith($select);
     }

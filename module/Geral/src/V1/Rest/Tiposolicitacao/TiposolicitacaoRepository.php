@@ -12,4 +12,12 @@ class TiposolicitacaoRepository
     {
         $this->tableGateway = $tableGateway;
     }
+
+    public function fetchall() {
+        $sql = $this->tableGateway->getSql();
+        $select = $sql->select()
+        ->where('status="ativo"');
+        //echo $sql->getSqlstringForSqlObject($select); die ;
+        return $this->tableGateway->selectWith($select);
+    }
 }

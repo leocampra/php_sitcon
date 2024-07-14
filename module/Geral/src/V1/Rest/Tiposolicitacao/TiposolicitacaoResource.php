@@ -69,6 +69,10 @@ class TiposolicitacaoResource extends AbstractResourceListener
      */
     public function fetchAll($params = [])
     {
+        $data = $this->service->fetchall();
+        if($data){
+            return $data;
+        }
         return new ApiProblem(405, 'The GET method has not been defined for collections');
     }
 
