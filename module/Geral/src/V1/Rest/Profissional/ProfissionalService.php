@@ -13,4 +13,8 @@ class ProfissionalService
     ) {
         $this->repository = $repository;
     }
+
+    public function fetchall(){
+        return $this->repository->fetchall();
+    }
 }
