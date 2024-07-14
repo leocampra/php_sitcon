@@ -13,4 +13,8 @@ class PacientesSErvice
     ) {
         $this->repository = $repository;
     }
+
+    public function fetchall($data){
+        return $this->repository->fetchall($data);
+    }
 }

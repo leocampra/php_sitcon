@@ -25,6 +25,7 @@ class PacientesResource extends AbstractResourceListener
      */
     public function create($data)
     {
+
         return new ApiProblem(405, 'The POST method has not been defined');
     }
 
@@ -69,6 +70,11 @@ class PacientesResource extends AbstractResourceListener
      */
     public function fetchAll($params = [])
     {
+        $dump = $params->getArrayCopy();
+        $data = $this->service->fetchall($dump);
+        if(isset($data)) {
+            return $data;
+        }
         return new ApiProblem(405, 'The GET method has not been defined for collections');
     }
 
