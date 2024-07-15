@@ -59,7 +59,8 @@ class PacientesResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        return new ApiProblem(405, 'The GET method has not been defined for individual resources');
+        return $this->service->fetch($id);
+        //return new ApiProblem(405, 'The GET method has not been defined for individual resources');
     }
 
     /**

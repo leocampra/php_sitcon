@@ -30,4 +30,13 @@ class PacientesRepository
         //echo $sql->getSqlstringForSqlObject($select); die ;
         return $this->tableGateway->selectWith($select);
     }
+
+    public function fetch($id)
+    {
+        $sql = $this->tableGateway->getSql();
+        $select = $sql->select()
+        ->where(['id'=>$id]);
+        //echo $sql->getSqlstringForSqlObject($select); die ;
+        return $this->tableGateway->selectWith($select)->current();
+    }
 }

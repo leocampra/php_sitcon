@@ -17,4 +17,8 @@ class PacientesSErvice
     public function fetchall($data){
         return $this->repository->fetchall($data);
     }
+
+    public function fetch($id){
+        return $this->repository->fetch($id);
+    }
 }
