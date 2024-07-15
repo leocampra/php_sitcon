@@ -22,7 +22,7 @@ class ProfissionalRepository
         ->where('profissionalatende.status="ativo"')
         ->order('profissional.nome asc');
         if (isset($data['procedimentos'])) {
-            $select->where('profissionalatende.procedimentos_id in ('.$data['procedimentos'].')');
+            $select->where(['profissionalatende.procedimentos_id in (?)'=>$data['procedimentos']]);
         }
         //echo $sql->getSqlstringForSqlObject($select); die ;
         return $this->tableGateway->selectWith($select);

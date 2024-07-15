@@ -22,7 +22,7 @@ class SolicitacaoRepository
         $sql = $this->tableGateway->getSql();
         $select = $sql->select()
             ->where(['pacientes_id' => $data['paciente']])
-            ->where('data between "' . date('Y-m-d H:i:s', strtotime($data['inicio'] . ' 00:00:00')) . '" and "' . date('Y-m-d H:i:s', strtotime($data['fim'] . ' 23:59:59')) . '"');
+            ->where(['data between ? AND ?'=> [date('Y-m-d H:i:s', strtotime($data['inicio'] . ' 00:00:00')), date('Y-m-d H:i:s', strtotime($data['fim'] . ' 23:59:59'))]]);
 
         //echo $sql->getSqlstringForSqlObject($select); die ;
         return $this->tableGateway->selectWith($select);
