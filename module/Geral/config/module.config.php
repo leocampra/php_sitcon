@@ -123,7 +123,9 @@ return [
                 0 => 'GET',
                 1 => 'POST',
             ],
-            'collection_query_whitelist' => [],
+            'collection_query_whitelist' => [
+                0 => 'procedimentos',
+            ],
             'page_size' => 25,
             'page_size_param' => null,
             'entity_class' => \Geral\V1\Rest\Profissional\ProfissionalEntity::class,

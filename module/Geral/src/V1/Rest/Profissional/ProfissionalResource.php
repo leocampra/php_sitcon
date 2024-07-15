@@ -69,7 +69,8 @@ class ProfissionalResource extends AbstractResourceListener
      */
     public function fetchAll($params = [])
     {
-        $data = $this->service->fetchall();
+        $dump = $params->getArrayCopy();
+        $data = $this->service->fetchall($dump);
         if(isset($data)) {
             return $data;
         }
