@@ -1,7 +1,7 @@
 <?php
 namespace Geral\V1\Rest\Pacientes;
 
-class PacientesSErvice
+class PacientesService
 {
     /**
      * @var PacientesRepository

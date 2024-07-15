@@ -51,4 +51,5 @@ class ProcedimentosEntity
         $this->tipoid = $tipoid;
         return $this;
     }
+    
 }

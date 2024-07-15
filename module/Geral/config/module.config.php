@@ -22,6 +22,14 @@ return [
             \Geral\V1\Rest\Tiposolicitacao\TiposolicitacaoService::class => \Geral\V1\Rest\Tiposolicitacao\TiposolicitacaoServiceFactory::class,
             \Geral\V1\Rest\Tiposolicitacao\TiposolicitacaoRepository::class => \Geral\V1\Rest\Tiposolicitacao\TiposolicitacaoRepositoryFactory::class,
             \Geral\V1\Rest\Tiposolicitacao\TiposolicitacaoTableGateway::class => \Geral\V1\Rest\Tiposolicitacao\TiposolicitacaoTableGateway::class,
+            \Geral\V1\Rest\Solicitacao\SolicitacaoResource::class => \Geral\V1\Rest\Solicitacao\SolicitacaoResourceFactory::class,
+            \Geral\V1\Rest\Solicitacao\SolicitacaoRepository::class => \Geral\V1\Rest\Solicitacao\SolicitacaoRepositoryFactory::class,
+            \Geral\V1\Rest\Solicitacao\SolicitacaoService::class => \Geral\V1\Rest\Solicitacao\SolicitacaoServiceFactory::class,
+            \Geral\V1\Rest\Solicitacao\SolicitacaoTableGateway::class => \Geral\V1\Rest\Solicitacao\SolicitacaoTableGateway::class,
+            \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoResource::class => \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoResourceFactory::class,
+            \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoRepository::class => \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoRepositoryFactory::class,
+            \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoService::class => \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoServiceFactory::class,
+            \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoTableGateway::class => \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoTableGateway::class,
         ],
     ],
     'router' => [
@@ -71,6 +79,24 @@ return [
                     ],
                 ],
             ],
+            'geral.rest.solicitacao' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/solicitacao[/:solicitacao_id]',
+                    'defaults' => [
+                        'controller' => 'Geral\\V1\\Rest\\Solicitacao\\Controller',
+                    ],
+                ],
+            ],
+            'geral.rest.solicitacaoprocedimento' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/solicitacaoprocedimento[/:solicitacaoprocedimento_id]',
+                    'defaults' => [
+                        'controller' => 'Geral\\V1\\Rest\\Solicitacaoprocedimento\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'api-tools-versioning' => [
@@ -80,6 +106,8 @@ return [
             2 => 'geral.rest.profissionalatende',
             3 => 'geral.rest.procedimentos',
             4 => 'geral.rest.tiposolicitacao',
+            5 => 'geral.rest.solicitacao',
+            6 => 'geral.rest.solicitacaoprocedimento',
         ],
     ],
     'api-tools-rest' => [
@@ -200,6 +228,54 @@ return [
             'collection_class' => \Geral\V1\Rest\Tiposolicitacao\TiposolicitacaoCollection::class,
             'service_name' => 'Tiposolicitacao',
         ],
+        'Geral\\V1\\Rest\\Solicitacao\\Controller' => [
+            'listener' => \Geral\V1\Rest\Solicitacao\SolicitacaoResource::class,
+            'route_name' => 'geral.rest.solicitacao',
+            'route_identifier_name' => 'solicitacao_id',
+            'collection_name' => 'solicitacao',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [
+                0 => 'paciente',
+                1 => 'inicio',
+                2 => 'fim',
+            ],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Geral\V1\Rest\Solicitacao\SolicitacaoEntity::class,
+            'collection_class' => \Geral\V1\Rest\Solicitacao\SolicitacaoCollection::class,
+            'service_name' => 'Solicitacao',
+        ],
+        'Geral\\V1\\Rest\\Solicitacaoprocedimento\\Controller' => [
+            'listener' => \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoResource::class,
+            'route_name' => 'geral.rest.solicitacaoprocedimento',
+            'route_identifier_name' => 'solicitacaoprocedimento_id',
+            'collection_name' => 'solicitacaoprocedimento',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoEntity::class,
+            'collection_class' => \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoCollection::class,
+            'service_name' => 'Solicitacaoprocedimento',
+        ],
     ],
     'api-tools-content-negotiation' => [
         'controllers' => [
@@ -208,6 +284,8 @@ return [
             'Geral\\V1\\Rest\\Profissionalatende\\Controller' => 'HalJson',
             'Geral\\V1\\Rest\\Procedimentos\\Controller' => 'HalJson',
             'Geral\\V1\\Rest\\Tiposolicitacao\\Controller' => 'HalJson',
+            'Geral\\V1\\Rest\\Solicitacao\\Controller' => 'HalJson',
+            'Geral\\V1\\Rest\\Solicitacaoprocedimento\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'Geral\\V1\\Rest\\Pacientes\\Controller' => [
@@ -235,6 +313,16 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'Geral\\V1\\Rest\\Solicitacao\\Controller' => [
+                0 => 'application/vnd.geral.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'Geral\\V1\\Rest\\Solicitacaoprocedimento\\Controller' => [
+                0 => 'application/vnd.geral.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'Geral\\V1\\Rest\\Pacientes\\Controller' => [
@@ -254,6 +342,14 @@ return [
                 1 => 'application/json',
             ],
             'Geral\\V1\\Rest\\Tiposolicitacao\\Controller' => [
+                0 => 'application/vnd.geral.v1+json',
+                1 => 'application/json',
+            ],
+            'Geral\\V1\\Rest\\Solicitacao\\Controller' => [
+                0 => 'application/vnd.geral.v1+json',
+                1 => 'application/json',
+            ],
+            'Geral\\V1\\Rest\\Solicitacaoprocedimento\\Controller' => [
                 0 => 'application/vnd.geral.v1+json',
                 1 => 'application/json',
             ],
@@ -319,6 +415,30 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'geral.rest.tiposolicitacao',
                 'route_identifier_name' => 'tiposolicitacao_id',
+                'is_collection' => true,
+            ],
+            \Geral\V1\Rest\Solicitacao\SolicitacaoEntity::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'geral.rest.solicitacao',
+                'route_identifier_name' => 'solicitacao_id',
+                'hydrator' => \Laminas\Hydrator\ClassMethodsHydrator::class,
+            ],
+            \Geral\V1\Rest\Solicitacao\SolicitacaoCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'geral.rest.solicitacao',
+                'route_identifier_name' => 'solicitacao_id',
+                'is_collection' => true,
+            ],
+            \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoEntity::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'geral.rest.solicitacaoprocedimento',
+                'route_identifier_name' => 'solicitacaoprocedimento_id',
+                'hydrator' => \Laminas\Hydrator\ClassMethodsHydrator::class,
+            ],
+            \Geral\V1\Rest\Solicitacaoprocedimento\SolicitacaoprocedimentoCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'geral.rest.solicitacaoprocedimento',
+                'route_identifier_name' => 'solicitacaoprocedimento_id',
                 'is_collection' => true,
             ],
         ],

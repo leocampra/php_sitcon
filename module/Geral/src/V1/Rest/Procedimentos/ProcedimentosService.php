@@ -17,4 +17,5 @@ class ProcedimentosService
     public function fetchall($dump) {
         return $this->repository->fetchall($dump);
     }
+
 }
