@@ -6,7 +6,7 @@ class ProcedimentosEntity
     protected $id;
     protected $descricao;
     protected $status;
-    protected $tipo_id;
+    protected $tipoid;
 
     function getId()
     {
@@ -23,9 +23,9 @@ class ProcedimentosEntity
         return $this->status;
     }
 
-    function getTipo_id()
+    function getTipoid()
     {
-        return $this->tipo_id;
+        return $this->tipoid;
     }
 
     function setId($id)
@@ -46,9 +46,9 @@ class ProcedimentosEntity
         return $this;
     }
 
-    function setTipo_id($tipo_id)
+    function setTipoid($tipoid)
     {
-        $this->tipo_id = $tipo_id;
+        $this->tipoid = $tipoid;
         return $this;
     }
 }
