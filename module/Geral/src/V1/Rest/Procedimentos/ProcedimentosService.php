@@ -15,7 +15,24 @@ class ProcedimentosService
     }
 
     public function fetchall($dump) {
-        return $this->repository->fetchall($dump);
+        $explode = explode(',',$dump['tipo']);
+        $array=[];
+        foreach($explode as $e){
+            $valores = $this->validar($array,$e);
+        }
+        return $valores;
     }
 
+    public function validar($array, $e){
+        $valores = $this->repository->fetchall($e);
+        $list=[];
+        foreach($valores as $v){
+            $list=[
+                'id'=>$v->getId(),
+                'descricao'=>$v->getDescricao()
+            ];
+            array_push($array, $list);
+        }
+        return $array;
+    }
 }

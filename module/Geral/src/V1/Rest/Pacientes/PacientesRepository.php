@@ -23,7 +23,7 @@ class PacientesRepository
         if (isset($data['nome'])) {
             $select->where(['nome LIKE ?'=>'%'.$data['nome'].'%']);
         }
-        if (isset($dados['cpf'])) {
+        if (isset($data['cpf'])) {
             $select->where(['cpf' => $data['cpf']]);
         }
         $select->order('nome asc');

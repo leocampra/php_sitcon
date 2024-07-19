@@ -14,7 +14,25 @@ class ProfissionalService
         $this->repository = $repository;
     }
 
-    public function fetchall($data){
-        return $this->repository->fetchall($data);
+    public function fetchall($dump) {
+        $explode = explode(',',$dump['procedimentos']);
+        $array=[];
+        foreach($explode as $e){
+            $valores = $this->validar($array, $e);
+        }
+        return $valores;
+    }
+
+    public function validar($array, $e){
+        $valores = $this->repository->fetchall($e);
+        $list=[];
+        foreach($valores as $v){
+            $list=[
+                'id'=>$v->getId(),
+                'nome'=>$v->getNome()
+            ];
+            array_push($array, $list);
+        }
+        return $array;
     }
 }
