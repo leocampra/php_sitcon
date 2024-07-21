@@ -18,12 +18,21 @@ class ProfissionalService
         $explode = explode(',',$dump['procedimentos']);
         $array=[];
         foreach($explode as $e){
-            $valores = $this->validar($array, $e);
+            $dado = $this->validar($e);
+            $validar = 0;
+            foreach($array as $d){
+                if(in_array($dado['nome'], $d)){
+                    $validar++;
+                }
+            }
+            if($validar === 0){
+                $array[] = $dado;
+            }
         }
-        return $valores;
+        return $array;
     }
 
-    public function validar($array, $e){
+    public function validar($e){
         $valores = $this->repository->fetchall($e);
         $list=[];
         foreach($valores as $v){
@@ -31,8 +40,8 @@ class ProfissionalService
                 'id'=>$v->getId(),
                 'nome'=>$v->getNome()
             ];
-            array_push($array, $list);
+            
         }
-        return $array;
+        return $list;
     }
 }

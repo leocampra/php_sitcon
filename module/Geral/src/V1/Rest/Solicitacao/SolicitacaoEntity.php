@@ -13,7 +13,7 @@ class SolicitacaoEntity
     protected $procedimentos;
     protected $tiposolicitacao;
     protected $procedimento;
-
+    protected $profissionalid;
     function getId()
     {
         return $this->id;
@@ -62,6 +62,11 @@ class SolicitacaoEntity
     function getProcedimento()
     {
         return $this->procedimento;
+    }
+
+    function getProfissionalid()
+    {
+        return $this->profissionalid;
     }
 
     function setId($id)
@@ -121,6 +126,12 @@ class SolicitacaoEntity
     function setProcedimento($procedimento)
     {
         $this->procedimento = $procedimento;
+        return $this;
+    }
+
+    function setProfissionalid($profissionalid)
+    {
+        $this->profissionalid = $profissionalid;
         return $this;
     }
 }
