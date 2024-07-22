@@ -5,6 +5,7 @@ Get Laminas (Zend Framework)
 
 Banco de dados
 
+
 DROP TABLE IF EXISTS `pacientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -112,6 +113,65 @@ INSERT INTO `profissionalatende` VALUES (1,'ativo',1,2),(2,'ativo',2,2),(3,'ativ
 UNLOCK TABLES;
 
 --
+-- Table structure for table `solicitacao`
+--
+
+DROP TABLE IF EXISTS `solicitacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `solicitacao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data` datetime DEFAULT NULL,
+  `pacientes_id` int NOT NULL,
+  `profissional_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_solicitacao_pacientes1_idx` (`pacientes_id`),
+  KEY `fk_solicitacao_profissional1_idx` (`profissional_id`),
+  CONSTRAINT `fk_solicitacao_pacientes1` FOREIGN KEY (`pacientes_id`) REFERENCES `pacientes` (`id`),
+  CONSTRAINT `fk_solicitacao_profissional1` FOREIGN KEY (`profissional_id`) REFERENCES `profissional` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solicitacao`
+--
+
+LOCK TABLES `solicitacao` WRITE;
+/*!40000 ALTER TABLE `solicitacao` DISABLE KEYS */;
+INSERT INTO `solicitacao` VALUES (5,'2024-07-22 14:30:00',3,2);
+/*!40000 ALTER TABLE `solicitacao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `solicitacaoprocedimento`
+--
+
+DROP TABLE IF EXISTS `solicitacaoprocedimento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `solicitacaoprocedimento` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `solicitacao_id` int NOT NULL,
+  `procedimentos_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_solicitacaoprocedimento_solicitacao1_idx` (`solicitacao_id`),
+  KEY `fk_solicitacaoprocedimento_procedimentos1_idx` (`procedimentos_id`),
+  CONSTRAINT `fk_solicitacaoprocedimento_procedimentos1` FOREIGN KEY (`procedimentos_id`) REFERENCES `procedimentos` (`id`),
+  CONSTRAINT `fk_solicitacaoprocedimento_solicitacao1` FOREIGN KEY (`solicitacao_id`) REFERENCES `solicitacao` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solicitacaoprocedimento`
+--
+
+LOCK TABLES `solicitacaoprocedimento` WRITE;
+/*!40000 ALTER TABLE `solicitacaoprocedimento` DISABLE KEYS */;
+INSERT INTO `solicitacaoprocedimento` VALUES (4,5,1);
+/*!40000 ALTER TABLE `solicitacaoprocedimento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tiposolicitacao`
 --
 
@@ -133,3 +193,5 @@ CREATE TABLE `tiposolicitacao` (
 LOCK TABLES `tiposolicitacao` WRITE;
 /*!40000 ALTER TABLE `tiposolicitacao` DISABLE KEYS */;
 INSERT INTO `tiposolicitacao` VALUES (1,'Consulta','ativo'),(2,'Exames Laboratoriais','ativo');
+/*!40000 ALTER TABLE `tiposolicitacao` ENABLE KEYS */;
+UNLOCK TABLES;
